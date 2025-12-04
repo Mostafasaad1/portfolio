@@ -8,33 +8,32 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # 🔐 Minimal permissions – only what is required to push to gh-pages
+    permissions:
+      contents: write
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Install pnpm FIRST
     - name: Install pnpm
       uses: pnpm/action-setup@v2
       with:
         version: latest
-        run_install: false # prevent auto-install
+        run_install: false
 
-    # Install Node (with pnpm cache enabled)
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 18
         cache: pnpm
 
-    # Install dependencies
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    # Build project
     - name: Build project
       run: pnpm run build
 
-    # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
