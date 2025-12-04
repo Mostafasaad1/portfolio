@@ -3,8 +3,6 @@ name: Deploy Portfolio to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   deploy:
@@ -14,37 +12,29 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'pnpm'
-
+    # Install pnpm FIRST
     - name: Install pnpm
       uses: pnpm/action-setup@v2
       with:
         version: latest
-        run_install: false
+        run_install: false # prevent auto-install
 
-    - name: Get pnpm store directory
-      shell: bash
-      run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-    - name: Setup pnpm cache
-      uses: actions/cache@v3
+    # Install Node (with pnpm cache enabled)
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
+        node-version: 18
+        cache: pnpm
 
+    # Install dependencies
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
 
-    - name: Build portfolio
+    # Build project
+    - name: Build project
       run: pnpm run build
 
+    # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
