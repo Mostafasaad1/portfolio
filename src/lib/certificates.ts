@@ -33,6 +33,30 @@ export const certificates: Certificate[] = [
     url: '',
     image: `${import.meta.env.BASE_URL}images/certs/egsa.jpg`
   },
+    {
+    id: 4,
+    title: 'AI Bootcamp computer vison',
+    issuer: 'DevisionX',
+    date: 'Aug 2023',
+    url: '',
+    image: `${import.meta.env.BASE_URL}images/certs/DevisionX.jpg`
+  },
+    {
+    id: 5,
+    title: 'Open Control Solution Overview, High Level Advanced Solutions P1 & P2.',
+    issuer: 'Yokogawa',
+    date: 'Jul 2023',
+    url: '',
+    image: `${import.meta.env.BASE_URL}images/certs/public/images/certs/yokogawa.jpg`
+  },
+    {
+    id: 6,
+    title: 'Project Mangment',
+    issuer: 'Innovegypt',
+    date: 'Aug-Sept 2023',
+    url: '',
+    image: `${import.meta.env.BASE_URL}images/certs/innovegypt.jpg`
+  },
 ]
 
 export default certificates
