@@ -5,7 +5,7 @@ import sourceIdentifierPlugin from 'vite-plugin-source-identifier'
 
 const isProd = process.env.BUILD_MODE === 'prod'
 export default defineConfig({
-  base: './', // Use relative paths for GitHub Pages
+  base: '/', // <-- replace REPO_NAME with your GitHub repo name (or set to '/' for root)
   plugins: [
     react(), 
     sourceIdentifierPlugin({

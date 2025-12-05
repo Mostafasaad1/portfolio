@@ -15,7 +15,7 @@ export const certificates: Certificate[] = [
     issuer: 'ITI',
     date: 'Sept 2022',
     url: '',
-    image: '/images/certs/ros.jpg'
+    image: `${import.meta.env.BASE_URL}images/certs/ros.jpg`
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const certificates: Certificate[] = [
     issuer: 'ITI',
     date: 'Aug 2022',
     url: '',
-    image: '/images/certs/android.jpg'
+    image: `${import.meta.env.BASE_URL}images/certs/android.jpg`
   },
   {
     id: 3,
@@ -31,16 +31,8 @@ export const certificates: Certificate[] = [
     issuer: 'Egsa',
     date: 'Aug-Oct 2021',
     url: '',
-    image: '/images/certs/egsa.jpg'
+    image: `${import.meta.env.BASE_URL}images/certs/egsa.jpg`
   },
-//   {
-//     id: 4,
-//     title: 'Advanced C/C++ for Embedded Systems',
-//     issuer: 'Udemy',
-//     date: 'May 2023',
-//     url: '',
-//     image: 'https://via.placeholder.com/96?text=C%2B%2B'
-//   }
 ]
 
 export default certificates
