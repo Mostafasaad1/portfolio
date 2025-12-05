@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Github, MapPin, ExternalLink, Star, GitFork, Circle } from 'lucide-react'
 import './index.css'
-import { getReposUrl, getGitHubHeaders } from './config/github'
+import { getReposUrl, getGitHubHeaders, GITHUB_CONFIG } from './config/github'
+import Certificates from './components/Certificates'
 
 // Type definitions
 interface Repository {
@@ -125,6 +126,11 @@ function App() {
     }
   }
 
+  // Insert clamp to enforce configured per-page limit
+  const visibleRepos = Array.isArray(repos)
+    ? repos.slice(0, GITHUB_CONFIG.reposPerPage)
+    : []
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -138,6 +144,7 @@ function App() {
           <div className="hidden md:flex items-center gap-8">
             <button onClick={() => scrollToSection('about')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">About</button>
             <button onClick={() => scrollToSection('skills')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">Skills</button>
+            <button onClick={() => scrollToSection('certificates')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">Certificates</button>
             <button onClick={() => scrollToSection('projects')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">Projects</button>
             <button onClick={() => scrollToSection('github')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">GitHub</button>
             <button onClick={() => scrollToSection('contact')} className="text-body font-medium text-neutral-700 hover:text-primary-500 transition-colors duration-fast">Contact</button>
@@ -165,7 +172,7 @@ function App() {
           </p>
           <div className="flex items-center justify-center gap-2 text-small text-neutral-500 mb-12">
             <MapPin size={20} />
-            <span>Alexandria, Egypt</span>
+            <span>Cairo, Egypt</span>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
@@ -270,6 +277,9 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Certificates Section */}
+      <Certificates />
 
       {/* Featured Projects Section */}
       <section id="projects" className="py-24 px-4 sm:px-6 md:px-8">
@@ -402,7 +412,7 @@ function App() {
                 </div>
               )}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {repos.map(repo => (
+                {visibleRepos.map(repo => (
                   <a
                     key={repo.id}
                     href={repo.html_url}

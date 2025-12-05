@@ -9,8 +9,10 @@ export const GITHUB_CONFIG = {
   // Add your GitHub Personal Access Token here for authenticated requests
   // This increases rate limit from 60 to 5,000 requests/hour
   token: '', // Example: 'ghp_your_token_here'
-  reposPerPage: 9,
-  sortBy: 'stars',
+  // Increase per-page to include more repositories and sort by last updated
+  reposPerPage: 10,
+  // Use 'updated' so newly pushed repositories appear first
+  sortBy: 'Stars',
 }
 
 // Helper function to get headers for GitHub API requests
